@@ -1,0 +1,258 @@
+/* ==========================================================================
+   Marketing compositions
+   --------------------------------------------------------------------------
+   Editorial page bands shared by product, features, solutions, pricing,
+   about, security, integrations and how-it-works. Built strictly on the
+   tokens in globals.css; nothing here hard-codes a colour or radius.
+   ========================================================================== */
+
+/* --- Spec strip: hairline key/value band under a hero -------------------- */
+
+.spec-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0;
+  border-block: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.spec-strip > div {
+  display: grid;
+  gap: 4px;
+  padding: 20px 26px;
+  border-right: 1px solid var(--line);
+}
+
+.spec-strip > div:last-child {
+  border-right: 0;
+}
+
+.spec-strip dt {
+  font: 500 var(--step--1) / 1.5 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-faint);
+}
+
+.spec-strip dd {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 700;
+  letter-spacing: var(--tracking-tight);
+}
+
+/* --- Editorial row: alternating copy + visual panel ---------------------- */
+
+.edit-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(34px, 5vw, 84px);
+  align-items: center;
+  padding-block: clamp(40px, 5vw, 72px);
+}
+
+.edit-row + .edit-row {
+  border-top: 1px solid var(--line-soft);
+}
+
+.edit-row-flip .edit-copy {
+  order: 2;
+}
+
+.edit-row-flip .edit-visual {
+  order: 1;
+}
+
+.edit-copy {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.edit-copy h2 {
+  font-size: var(--step-4);
+  line-height: 1.1;
+  letter-spacing: var(--tracking-tighter);
+}
+
+.edit-copy .large-copy {
+  font-size: var(--step-1);
+  margin: 0;
+}
+
+.edit-index {
+  font: 500 var(--step--1) / 1 var(--font-mono);
+  color: var(--lime-deep);
+  letter-spacing: var(--tracking-wide);
+}
+
+.edit-visual {
+  position: relative;
+}
+
+.edit-visual > .panel,
+.edit-visual > .side-note,
+.edit-visual > .stat-band {
+  height: 100%;
+}
+
+/* Oversized ghost numeral behind a visual panel */
+.edit-figure {
+  position: absolute;
+  z-index: 0;
+  top: -0.18em;
+  left: -0.06em;
+  font-size: clamp(7rem, 14vw, 12rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: var(--tracking-tighter);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  pointer-events: none;
+  user-select: none;
+}
+
+.edit-row-flip .edit-figure {
+  left: auto;
+  right: -0.06em;
+}
+
+.edit-visual > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Audience / index cards: grid of entry points ------------------------ */
+
+.audience-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 16px;
+}
+
+.audience-card {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: clamp(24px, 2.8vw, 34px);
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  transition: border-color var(--duration) var(--ease-out),
+    box-shadow var(--duration) var(--ease-out),
+    transform var(--duration) var(--ease-out);
+}
+
+.audience-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+}
+
+.audience-card h3 {
+  font-size: var(--step-2);
+  letter-spacing: var(--tracking-tight);
+}
+
+.audience-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--step-0);
+  line-height: var(--leading-loose);
+}
+
+.audience-card .audience-link {
+  margin-top: 10px;
+}
+
+.audience-count {
+  position: absolute;
+  top: clamp(20px, 2.2vw, 26px);
+  right: clamp(20px, 2.2vw, 26px);
+  font: 500 var(--step--1) / 1 var(--font-mono);
+  color: var(--line-strong);
+  letter-spacing: var(--tracking-wide);
+}
+
+.audience-card:hover .audience-count {
+  color: var(--lime-deep);
+}
+
+/* --- Closing panel overlay ring (reused on dark CTA panels) -------------- */
+
+.closing-ring::after {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  right: -110px;
+  top: -190px;
+  border: 1px solid rgba(216, 255, 79, 0.24);
+  border-radius: 50%;
+  box-shadow: 0 0 0 36px rgba(216, 255, 79, 0.04),
+    0 0 0 72px rgba(216, 255, 79, 0.02);
+  pointer-events: none;
+}
+
+/* --- Wide dark proof band with metric rail ------------------------------- */
+
+.proof-band {
+  position: relative;
+  display: grid;
+  gap: clamp(28px, 3.4vw, 44px);
+  padding: clamp(28px, 3.6vw, 56px);
+  background: var(--ink);
+  color: var(--text-on-dark);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+}
+
+.proof-band-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+
+.proof-band h2 {
+  font-size: var(--step-5);
+  letter-spacing: var(--tracking-tighter);
+  margin-bottom: 14px;
+}
+
+.proof-band p {
+  color: var(--text-on-dark-muted);
+}
+
+/* --- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .edit-row,
+  .proof-band-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .edit-row-flip .edit-copy {
+    order: 1;
+  }
+
+  .edit-row-flip .edit-visual {
+    order: 2;
+  }
+
+  .edit-figure {
+    font-size: clamp(6rem, 18vw, 9rem);
+  }
+}
+
+@media (max-width: 767px) {
+  .spec-strip > div {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .spec-strip > div:last-child {
+    border-bottom: 0;
+  }
+}
