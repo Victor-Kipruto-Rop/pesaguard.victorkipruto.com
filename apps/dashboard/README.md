@@ -1,6 +1,6 @@
 # PesaGuard Dashboard
 
-The authenticated application lives in `apps/dashboard` and is intentionally isolated from the public `pesaguard-web` site.
+The authenticated application lives in `apps/dashboard` and is intentionally isolated from the public marketing site in the repository root.
 
 ## Current contract boundary
 

@@ -1,6 +1,6 @@
 # PesaGuard web
 
-The public PesaGuard website lives in this folder as an isolated Next.js App Router project. The backend remains in the parent repository.
+The public PesaGuard website: a standalone Next.js App Router project. The backend lives in a separate repository (https://github.com/Victor-Kipruto-Rop/pesaguard).
 
 ## Run locally
 
@@ -12,6 +12,8 @@ npm run dev
 ```
 
 Set `PESAGUARD_API_URL` to enable the server-side status health check. No backend secret is exposed to the browser.
+
+Set `NEXT_PUBLIC_SITE_URL` (for example `https://pesaguard.victorkipruto.com`) at build time. The sitemap, robots.txt, canonical URLs and `metadataBase` all read it and fall back to `http://localhost:3000` if it is missing.
 
 ## Checks
 

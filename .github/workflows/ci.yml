@@ -1,22 +1,21 @@
 name: Web checks
+
 on:
   push:
-    paths: ["pesaguard-web/**"]
   pull_request:
-    paths: ["pesaguard-web/**"]
+
 jobs:
   validate:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: pesaguard-web
+    env:
+      NEXT_PUBLIC_SITE_URL: https://pesaguard.victorkipruto.com
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-            cache: npm
-          - run: npm install
+          cache: npm
+      - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
