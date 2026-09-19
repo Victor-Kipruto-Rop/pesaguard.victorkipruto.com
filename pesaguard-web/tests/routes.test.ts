@@ -1,3 +1,6 @@
 import { describe, expect, it } from "vitest";
-const routes = ["/", "/product", "/solutions", "/features", "/security", "/integrations", "/pricing", "/documentation", "/api", "/about", "/contact", "/status", "/privacy", "/terms", "/cookies"];
-describe("public route contract", () => { it("keeps the primary routes explicit", () => { expect(routes).toHaveLength(15); expect(routes).toContain("/status"); }); });
+import { navigation } from "@/config/navigation";
+import { integrations } from "@/config/integrations";
+
+const routes = ["/", "/product", "/solutions", "/features", "/security", "/integrations", "/pricing", "/documentation", "/api", "/about", "/contact", "/status", "/privacy", "/terms", "/cookies", "/how-it-works"];
+describe("public route contract", () => { it("keeps the primary routes explicit", () => { expect(routes).toHaveLength(16); expect(routes).toContain("/status"); }); it("only links to routes that exist", () => { const known = new Set(routes); const linked = new Set<string>(); for (const item of navigation.primary) { linked.add(item.href); for (const group of item.groups ?? []) { for (const link of group.links) { linked.add(link.href); } } if (item.foot) { linked.add(item.foot.href); } } for (const group of navigation.footer) { for (const link of group.links) { linked.add(link.href); } } for (const integration of integrations) { linked.add(integration.href); } const dynamicPrefixes = ["/features/", "/solutions/", "/integrations/", "/security/", "/api/", "/documentation/", "/contact/", "/status/"]; for (const href of linked) { const knownRoute = known.has(href) || dynamicPrefixes.some((prefix) => href.startsWith(prefix)); expect(knownRoute, `navigation links to unknown route ${href}`).toBe(true); } }); });

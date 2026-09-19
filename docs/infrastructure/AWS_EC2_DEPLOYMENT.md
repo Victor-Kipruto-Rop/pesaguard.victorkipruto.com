@@ -89,8 +89,8 @@ cd ~/pesaguard
 Create the runtime environment file:
 
 ```bash
-cp .env.example infra/.env
-nano infra/.env
+cp .env.example .env
+nano .env
 ```
 
 At minimum, set real values for:
@@ -108,15 +108,16 @@ DARAJA_SHARED_SECRET=GENERATE_A_LONG_RANDOM_SECRET
 PESAGUARD_CORS_ALLOWED_ORIGINS=https://api.pesaguard.victorkipruto.com
 ```
 
-Generate secrets on the server, and do not commit `infra/.env`:
+Generate secrets on the server, and do not commit `.env`:
 
 ```bash
 python3 -c 'import secrets; print(secrets.token_urlsafe(48))'
 python3 -c 'from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())'
-chmod 600 infra/.env
+chmod 600 .env
 ```
 
-Use the actual generated values in `infra/.env`.
+Use the actual generated values in `.env`. The systemd backup service uses a
+separate `/etc/pesaguard/backup.env` file for host-level backup credentials.
 
 ## 7. Start the Docker backend
 

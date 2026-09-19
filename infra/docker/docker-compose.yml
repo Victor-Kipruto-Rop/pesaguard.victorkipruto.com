@@ -56,27 +56,30 @@ services:
     volumes:
       - ../../monitoring/otel-collector.yaml:/etc/otel-collector.yaml:ro
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.6.0
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-
-  kafka:
-    image: confluentinc/cp-kafka:7.6.0
-    depends_on:
-      - zookeeper
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v25.2.2
+    container_name: pesaguard-redpanda
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --node-id=0
+      - --check=false
+      - --kafka-addr=PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr=PLAINTEXT://redpanda:9092,PLAINTEXT://localhost:19092
+      - --pandaproxy-addr=PLAINTEXT://0.0.0.0:8082
+      - --advertise-pandaproxy-addr=PLAINTEXT://redpanda:8082
     ports:
-      - "9092:9092"
+      - "19092:19092"
+      - "8082:8082"
+      - "9644:9644"
     environment:
       <<: *residency-env
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_LOG_RETENTION_HOURS: 168
-      KAFKA_LOG_RETENTION_BYTES: 10737418240
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
 
   postgres:
     image: postgres:16
@@ -112,22 +115,22 @@ services:
     ports:
       - "5000:5000"
     env_file:
-      - ../.env
+      - ../../.env
     environment:
       <<: [*residency-env, *observability-env]
       DATABASE_URL: ${DATABASE_URL_DOCKER:?DATABASE_URL_DOCKER must be set}
       PESAGUARD_API_URL: ${PESAGUARD_API_URL:-https://api.pesaguard.victorkipruto.com}
-      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-kafka:29092}
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-redpanda:9092}
       PESAGUARD_BIND_HOST: 0.0.0.0
       JWT_SECRET_KEY: ${JWT_SECRET_KEY:?JWT_SECRET_KEY must be set}
       SENTRY_DSN: ${SENTRY_DSN:-}
-      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
       SENTRY_RELEASE: ${SENTRY_RELEASE:-}
       SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
       SENTRY_PROFILES_SAMPLE_RATE: ${SENTRY_PROFILES_SAMPLE_RATE:-0.0}
       SENTRY_SEND_DEFAULT_PII: ${SENTRY_SEND_DEFAULT_PII:-false}
     depends_on:
-      - kafka
+      - redpanda
 
   reconciliation_job:
     build:
@@ -135,19 +138,19 @@ services:
       dockerfile: infra/docker/Dockerfile
     command: ["python", "pesaguard_backend_pipeline/reconciliation_job.py"]
     env_file:
-      - ../.env
+      - ../../.env
     environment:
       <<: [*residency-env, *observability-env]
       DATABASE_URL: ${DATABASE_URL_DOCKER:-postgresql://pesaguard:pesaguard@postgres:5432/pesaguard}
-      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-kafka:29092}
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-redpanda:9092}
       SENTRY_DSN: ${SENTRY_DSN:-}
-      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
       SENTRY_RELEASE: ${SENTRY_RELEASE:-}
       SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
       SENTRY_PROFILES_SAMPLE_RATE: ${SENTRY_PROFILES_SAMPLE_RATE:-0.0}
       SENTRY_SEND_DEFAULT_PII: ${SENTRY_SEND_DEFAULT_PII:-false}
     depends_on:
-      - kafka
+      - redpanda
       - postgres
 
   dashboard_api:
@@ -158,13 +161,13 @@ services:
     ports:
       - "5001:5001"
     env_file:
-      - ../.env
+      - ../../.env
     environment:
       <<: [*residency-env, *observability-env]
       DATABASE_URL: ${DATABASE_URL_DOCKER:-postgresql://pesaguard:pesaguard@postgres:5432/pesaguard}
       PESAGUARD_API_URL: ${PESAGUARD_API_URL:-https://api.pesaguard.victorkipruto.com}
       SENTRY_DSN: ${SENTRY_DSN:-}
-      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
       SENTRY_RELEASE: ${SENTRY_RELEASE:-}
       SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
       SENTRY_PROFILES_SAMPLE_RATE: ${SENTRY_PROFILES_SAMPLE_RATE:-0.0}
@@ -178,15 +181,15 @@ services:
       dockerfile: infra/docker/Dockerfile
     command: ["/bin/sh", "pesaguard_backend_pipeline/worker_entrypoint.sh"]
     env_file:
-      - ../.env
+      - ../../.env
     environment:
       <<: [*residency-env, *observability-env]
       DATABASE_URL: ${DATABASE_URL_DOCKER:-postgresql://pesaguard:pesaguard@postgres:5432/pesaguard}
-      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-kafka:29092}
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-redpanda:9092}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
       RQ_QUEUE_NAME: ${RQ_QUEUE_NAME:-transaction_events}
       SENTRY_DSN: ${SENTRY_DSN:-}
-      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
       SENTRY_RELEASE: ${SENTRY_RELEASE:-}
       SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
       SENTRY_PROFILES_SAMPLE_RATE: ${SENTRY_PROFILES_SAMPLE_RATE:-0.0}
@@ -194,7 +197,7 @@ services:
     depends_on:
       - redis
       - postgres
-      - kafka
+      - redpanda
 
   communications_worker:
     build:
@@ -202,22 +205,23 @@ services:
       dockerfile: infra/docker/Dockerfile.worker
     command: ["python", "-m", "pesaguard_backend_pipeline.communications.worker"]
     env_file:
-      - ../.env
+      - ../../.env
     environment:
       <<: [*residency-env, *observability-env]
       DATABASE_URL: ${DATABASE_URL_DOCKER:-postgresql://pesaguard:pesaguard@postgres:5432/pesaguard}
-      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-kafka:29092}
+      KAFKA_BOOTSTRAP_SERVERS: ${KAFKA_BOOTSTRAP_SERVERS_DOCKER:-redpanda:9092}
       PESAGUARD_NOTIFICATION_TOPIC: ${PESAGUARD_NOTIFICATION_TOPIC:-notification.events}
       SENTRY_DSN: ${SENTRY_DSN:-}
-      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-development}
+      SENTRY_ENVIRONMENT: ${SENTRY_ENVIRONMENT:-production}
       SENTRY_RELEASE: ${SENTRY_RELEASE:-}
       SENTRY_TRACES_SAMPLE_RATE: ${SENTRY_TRACES_SAMPLE_RATE:-0.1}
       SENTRY_PROFILES_SAMPLE_RATE: ${SENTRY_PROFILES_SAMPLE_RATE:-0.0}
       SENTRY_SEND_DEFAULT_PII: ${SENTRY_SEND_DEFAULT_PII:-false}
     depends_on:
-      - kafka
+      - redpanda
       - postgres
 
 volumes:
   pgdata:
   wal_archive:
+  redpanda_data:

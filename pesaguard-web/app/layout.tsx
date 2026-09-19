@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { StatusStrip } from "@/components/layout/StatusStrip";
 import { organizationJsonLd } from "@/lib/seo/structured-data";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
@@ -8,6 +9,7 @@ import "@/styles/home.css";
 import "@/styles/api.css";
 import "@/styles/docs.css";
 import "@/styles/sections.css";
+import "@/styles/marketing.css";
 import "@/styles/animations.css";
 import "@/styles/typography.css";
 
@@ -23,6 +25,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }} />
+        <StatusStrip />
         <Navbar />
         <main id="main-content">{children}</main>
         <Footer />

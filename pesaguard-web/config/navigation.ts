@@ -164,34 +164,54 @@ const footer: FooterGroup[] = [
     title: "Product",
     links: [
       { label: "Product overview", href: "/product" },
-      { label: "How it works", href: "/how-it-works" },
       { label: "Features", href: "/features" },
+      { label: "Reconciliation", href: "/features/reconciliation" },
+      { label: "Fraud detection", href: "/features/fraud-detection" },
+      { label: "Alerts", href: "/features/real-time-alerts" },
       { label: "Integrations", href: "/integrations" },
-      { label: "Pricing", href: "/pricing" },
+    ],
+  },
+  {
+    title: "Solutions",
+    links: [
+      { label: "SACCOs", href: "/solutions/saccos" },
+      { label: "Merchants", href: "/solutions/merchants" },
+      { label: "Financial institutions", href: "/solutions/financial-institutions" },
+      { label: "Fintechs", href: "/solutions/fintechs" },
     ],
   },
   {
     title: "Developers",
     links: [
-      { label: "Documentation", href: "/documentation" },
       { label: "API reference", href: "/api" },
-      { label: "Getting started", href: "/documentation/getting-started" },
+      { label: "Documentation", href: "/documentation" },
       { label: "Webhooks", href: "/documentation/webhooks" },
       { label: "Changelog", href: "/documentation/changelog" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "How it works", href: "/how-it-works" },
+      { label: "System status", href: "/status" },
+      { label: "Incident history", href: "/status/incidents" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
   {
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Security", href: "/security" },
-      { label: "Status", href: "/status" },
       { label: "Contact", href: "/contact" },
+      { label: "Sales", href: "/contact/sales" },
+      { label: "Support", href: "/contact/support" },
     ],
   },
   {
-    title: "Legal",
+    title: "Security",
     links: [
+      { label: "Security model", href: "/security" },
+      { label: "Tenant isolation", href: "/security/tenant-isolation" },
       { label: "Privacy", href: "/privacy" },
       { label: "Terms", href: "/terms" },
       { label: "Cookies", href: "/cookies" },

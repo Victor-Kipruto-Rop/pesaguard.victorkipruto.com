@@ -1,5 +1,3 @@
-import { siteConfig } from "@/config/site";
-
 /** What a backend health probe is expected to return, for typed consumption on the status page. */
 export type HealthProbe = {
   reachable: boolean;
@@ -65,5 +63,4 @@ export async function getBackendHealth(): Promise<HealthProbe> {
   }
 }
 
-export { siteConfig };
 

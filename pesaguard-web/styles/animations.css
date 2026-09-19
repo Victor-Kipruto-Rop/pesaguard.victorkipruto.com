@@ -41,7 +41,7 @@
     transform: scaleX(0);
   }
   to {
-    transform: scaleX(1);
+    transform: scaleX(var(--bar-scale, 1));
   }
 }
 
@@ -197,15 +197,6 @@
   border-radius: 4px;
 }
 
-@keyframes pg-scale-x {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(var(--bar-scale, 1));
-  }
-}
-
 @keyframes pg-pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(143, 206, 63, 0.45);
@@ -340,7 +331,7 @@
   animation-play-state: paused;
 }
 
-/* Loading placeholder used by app/**/loading.tsx. */
+/* Loading placeholder used by the route-level loading.tsx files. */
 .shimmer {
   background: linear-gradient(
     90deg,
@@ -367,7 +358,7 @@
   height: 220px;
 }
 
-/* Shimmer showcase used by /animations only. */
+/* Shimmer showcase block, retained for skeleton previews. */
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal].is-revealed,
