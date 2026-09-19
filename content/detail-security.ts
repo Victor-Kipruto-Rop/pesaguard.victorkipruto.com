@@ -321,5 +321,4 @@ export const securityDetails: Record<string, PageData> = {
       primary: { label: "Talk to our team", href: "/contact/sales", description: "Walk through compliance evidence." },
     },
   },
-
-/*[[SNEXT]]*/
+};

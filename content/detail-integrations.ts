@@ -136,5 +136,4 @@ export const integrationDetails: Record<string, PageData> = {
       secondary: { label: "Webhook docs", href: "/documentation/webhooks", description: "Verify the contract." },
     },
   },
-
-/*[[INEXT]]*/
+};

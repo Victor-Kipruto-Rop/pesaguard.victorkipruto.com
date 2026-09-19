@@ -1,5 +1,9 @@
 import { PageTemplate } from "@/components/PageTemplate";
 import { pages } from "@/content/pages";
+import { detailPages } from "@/content/detail";
+import { integrationDetails } from "@/content/detail-integrations";
+import { securityDetails } from "@/content/detail-security";
+import { solutionDetails } from "@/content/detail-solutions";
 
 /**
  * Eyebrow labels for detail pages, keyed by their title copy.
@@ -47,12 +51,21 @@ export function RoutePage({
 }) {
   const base = pages[slug] ?? pages.product;
   const resolvedTitle = title ?? base.title;
-  const label = (title && detailLabels[title]) || base.label;
+  /**
+   * Detail routes name their own title; the dedicated content modules carry
+   * their own body, spec, FAQ and CTAs. Key order here matters: titles are
+   * unique across the site, while `slug` is the parent page.
+   */
+  const detail =
+    (title && (detailPages[title] ?? integrationDetails[title] ?? securityDetails[title] ?? solutionDetails[title])) ||
+    undefined;
+  const data = detail ?? base;
+  const label = (title && detailLabels[title]) || detail?.label || base.label;
 
   return (
     <PageTemplate
       slug={slug}
-      data={{ ...base, title: resolvedTitle, description: description ?? base.description, label }}
+      data={{ ...data, title: resolvedTitle, description: description ?? data.description, label }}
     />
   );
 }
