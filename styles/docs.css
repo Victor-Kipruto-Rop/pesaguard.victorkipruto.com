@@ -369,3 +369,452 @@
     border-bottom: 1px solid var(--line);
   }
 }
+
+/* ==========================================================================
+   Documentation, second pass
+   --------------------------------------------------------------------------
+   Header, meta strip, "On this page" rail, endpoint header, parameter tables,
+   language tabs and code tokens. Uses the tokens defined in globals.css.
+   ========================================================================== */
+
+.docs-header .eyebrow {
+  margin-bottom: 0;
+}
+
+.docs-header h1 {
+  max-width: 22ch;
+}
+
+.docs-header .lede {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.docs-meta {
+  margin: 4px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  gap: 14px 34px;
+}
+
+.docs-meta div {
+  display: grid;
+  gap: 2px;
+}
+
+.docs-meta dt {
+  font: 500 var(--step--1) / 1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-faint);
+}
+
+.docs-meta dd {
+  margin: 0;
+  font: 500 var(--step-0) / 1.5 var(--font-mono);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.docs-body h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.docs-anchor {
+  font: 400 0.7em / 1 var(--font-mono);
+  color: var(--text-faint);
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.docs-body h2:hover .docs-anchor,
+.docs-anchor:focus-visible {
+  opacity: 1;
+}
+
+.docs-body h3 {
+  margin-top: 6px;
+}
+
+.docs-body ol:not(.docs-steps) {
+  display: grid;
+  gap: 10px;
+  padding-left: 22px;
+  list-style: decimal;
+  color: var(--text-muted);
+  line-height: var(--leading-loose);
+}
+
+.docs-body a:not(.docs-anchor):not(.button):not(.docs-card) {
+  color: var(--lime-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--lime-strong);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 2px;
+}
+
+.docs-body a:not(.docs-anchor):not(.button):not(.docs-card):hover {
+  text-decoration-color: var(--lime-deep);
+}
+
+/* Code inside a code block is not an inline chip. */
+.docs-body .code-block code {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.docs-body .code-block {
+  margin: 4px 0;
+}
+
+.docs-body .table-wrap {
+  margin: 4px 0;
+}
+
+/* Third column: sticky "On this page" rail on wide screens. */
+.docs-toc {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .docs-shell-toc {
+    grid-template-columns: minmax(210px, 230px) minmax(0, 1fr) 170px;
+    gap: clamp(28px, 3vw, 48px);
+  }
+
+  .docs-toc {
+    display: block;
+    position: sticky;
+    top: calc(var(--header-height) + 24px);
+    padding-left: 18px;
+    border-left: 1px solid var(--line);
+  }
+
+  .docs-toc ol {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .docs-toc a {
+    font-size: var(--step--1);
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+
+  .docs-toc a:hover {
+    color: var(--ink);
+  }
+}
+
+.docs-sidebar-foot .text-link {
+  font-size: var(--step--1);
+}
+
+/* Endpoint header. */
+.endpoint-head {
+  display: grid;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper-raised);
+}
+
+.endpoint-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.docs-body .endpoint-line code {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: 500 var(--step-1) / 1.3 var(--font-mono);
+  overflow-wrap: anywhere;
+}
+
+.endpoint-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px 24px;
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.endpoint-facts dt {
+  font: 500 var(--step--1) / 1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-faint);
+}
+
+.endpoint-facts dd {
+  margin: 2px 0 0;
+  font-size: var(--step-0);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* Parameter tables. */
+.param-table {
+  min-width: 0;
+}
+
+.param-table th,
+.param-table td {
+  padding: 16px 20px;
+}
+
+.param-table td {
+  line-height: 1.65;
+}
+
+.param-table td:first-child {
+  width: 34%;
+}
+
+.docs-body .param-table td:first-child code {
+  display: block;
+  width: fit-content;
+  margin-bottom: 8px;
+  overflow-wrap: anywhere;
+}
+
+.param-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+
+.docs-body td code {
+  white-space: nowrap;
+}
+
+.param-flag {
+  margin-left: 0;
+  padding: 2px 7px;
+  border-radius: var(--r-xs);
+  background: var(--lime-wash);
+  color: var(--lime-ink);
+  font: 500 0.72rem / 1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.param-type {
+  font: 500 var(--step--1) / 1.4 var(--font-mono);
+  color: var(--text-muted);
+}
+
+/* Language tabs, driven by radio inputs so no script is needed. */
+.code-tabs {
+  position: relative;
+  margin: 4px 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.code-tab-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.code-tab-bar {
+  display: flex;
+  gap: 4px;
+  padding: 0 0 8px;
+}
+
+.code-tab-label {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-full);
+  font: 500 var(--step--1) / 1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--duration) var(--ease-out), border-color var(--duration) var(--ease-out),
+    background var(--duration) var(--ease-out);
+}
+
+.code-tab-label:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+}
+
+.code-tab-panel {
+  display: none;
+}
+
+.code-tab-input-0:checked ~ .code-tab-bar .code-tab-label-0,
+.code-tab-input-1:checked ~ .code-tab-bar .code-tab-label-1,
+.code-tab-input-2:checked ~ .code-tab-bar .code-tab-label-2,
+.code-tab-input-3:checked ~ .code-tab-bar .code-tab-label-3 {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--lime);
+}
+
+.code-tab-input-0:checked ~ .code-tab-panel-0,
+.code-tab-input-1:checked ~ .code-tab-panel-1,
+.code-tab-input-2:checked ~ .code-tab-panel-2,
+.code-tab-input-3:checked ~ .code-tab-panel-3 {
+  display: block;
+}
+
+.code-tab-input:focus-visible ~ .code-tab-bar label {
+  outline: none;
+}
+
+.code-tab-input-0:focus-visible ~ .code-tab-bar .code-tab-label-0,
+.code-tab-input-1:focus-visible ~ .code-tab-bar .code-tab-label-1,
+.code-tab-input-2:focus-visible ~ .code-tab-bar .code-tab-label-2,
+.code-tab-input-3:focus-visible ~ .code-tab-bar .code-tab-label-3 {
+  outline: 2px solid var(--lime-strong);
+  outline-offset: 2px;
+}
+
+/* Code tokens. */
+.code-block .code-token-number {
+  color: var(--signal-amber);
+}
+
+.code-block .code-token-flag {
+  color: #9cc7de;
+}
+
+.code-block .code-token-var {
+  color: #e6cf8f;
+}
+
+.code-block .code-token-status-ok {
+  color: var(--lime);
+  font-weight: 700;
+}
+
+.code-block .code-token-status-err {
+  color: var(--signal-red);
+  font-weight: 700;
+}
+
+.code-block .code-label {
+  min-height: 44px;
+}
+
+/* File and endpoint names in a code label keep their case; only the language tag is uppercased. */
+.code-label > span:first-child:not(.mono-label) {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8rem;
+}
+
+/* Layout tuning: keep the docs on the same container as the site header. */
+@media (min-width: 1024px) {
+  .docs-shell {
+    grid-template-columns: minmax(210px, 240px) minmax(0, 1fr);
+    gap: clamp(28px, 3.4vw, 52px);
+  }
+}
+
+@media (max-width: 1023px) {
+  .docs-shell {
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .docs-shell-toc {
+    grid-template-columns: minmax(200px, 220px) minmax(0, 1fr) 160px;
+    gap: clamp(26px, 2.6vw, 40px);
+  }
+}
+
+/* Links inside cards keep the card's own colours. */
+.docs-body a.docs-card,
+.docs-body a.docs-card:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.docs-card h3 {
+  margin-top: 0;
+}
+
+/* Compact comparison tables: no wrapping in cells, tighter padding. */
+.data-table-compact {
+  min-width: 0;
+}
+
+.data-table-compact th,
+.data-table-compact td {
+  padding: 12px 12px;
+}
+
+.data-table-compact td {
+  white-space: nowrap;
+}
+
+/* Mobile menu: the sidebar collapses into a disclosure above the article. */
+.docs-menu {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .docs-sidebar {
+    display: none;
+  }
+
+  .docs-menu {
+    display: block;
+    border: 1px solid var(--line);
+    border-radius: var(--r-md);
+    background: var(--paper-raised);
+  }
+
+  .docs-menu summary {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .docs-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .docs-menu summary span {
+    font: 500 var(--step--1) / 1.4 var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--text-faint);
+  }
+
+  .docs-menu summary strong {
+    font-size: var(--step-0);
+  }
+
+  .docs-menu .docs-nav {
+    padding: 4px 18px 18px;
+    border-top: 1px solid var(--line-soft);
+  }
+}

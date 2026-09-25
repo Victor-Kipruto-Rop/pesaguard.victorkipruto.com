@@ -30,7 +30,7 @@ export const integrations: IntegrationSummary[] = [
     availability: "not-started",
     summary:
       "Named on this site so the scope is clear to buyers. No adapter, tests or documentation exist yet.",
-    evidence: "docs/architecture/CURRENT_ARCHITECTURE.md — Airtel Money is not implemented",
+    evidence: "docs/architecture/CURRENT_ARCHITECTURE.md: Airtel Money is not implemented",
   },
   {
     name: "Bank rails",
@@ -38,7 +38,7 @@ export const integrations: IntegrationSummary[] = [
     availability: "not-started",
     summary:
       "Statement and settlement imports from banks are out of today's scope. The design keeps room for them.",
-    evidence: "docs/architecture/CURRENT_ARCHITECTURE.md — bank adapters not implemented",
+    evidence: "docs/architecture/CURRENT_ARCHITECTURE.md: bank adapters not implemented",
   },
   {
     name: "Point of sale",
@@ -46,7 +46,7 @@ export const integrations: IntegrationSummary[] = [
     availability: "not-started",
     summary:
       "In-store terminal feeds are not ingested today. We only claim what the M-Pesa pipeline does.",
-    evidence: "docs/product/PRODUCT_SCOPE.md — M-Pesa is the active scope",
+    evidence: "docs/product/PRODUCT_SCOPE.md: M-Pesa is the active scope",
   },
 ];
 

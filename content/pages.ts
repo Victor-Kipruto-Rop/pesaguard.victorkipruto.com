@@ -252,8 +252,8 @@ export const pages: Record<string, PageData> = {
     ],
     cta: {
       eyebrow: "Meet the team",
-      title: "Tell us what dependable payments would unlock.",
-      body: "We build around real operator workflows, not slideware.",
+      title: "Tell us what you reconcile today.",
+      body: "We build around real operator workflows.",
       primary: { label: "Contact us", href: "/contact", description: "Start a conversation." },
     },
   },

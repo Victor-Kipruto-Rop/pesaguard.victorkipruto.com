@@ -1,16 +1,25 @@
-import { DocsLayout } from "@/components/documentation/DocsLayout";
-import { CodeBlock } from "@/components/ui/CodeBlock";
+import type { ReactNode } from "react";
+import { DocsLayout, type DocsMeta, type DocsSectionSpec } from "@/components/documentation/DocsLayout";
 
-export function DocsPage({ title, intro }: { title: string; intro: string }) {
+/** Thin wrapper kept so every docs route reads the same. */
+export function DocsPage({
+  slug,
+  title,
+  intro,
+  meta,
+  sections,
+  children,
+}: {
+  slug: string;
+  title: string;
+  intro: string;
+  meta?: DocsMeta[];
+  sections?: DocsSectionSpec[];
+  children?: ReactNode;
+}) {
   return (
-    <DocsLayout title={title}>
-      <p>{intro}</p>
-      <h2>Overview</h2>
-      <p>
-        Use this guide to make payment operations predictable, observable, and easy to investigate. Examples are
-        intentionally small so they can be adapted to your environment.
-      </p>
-      <CodeBlock label="Authorization header" language="http" code="Authorization: Bearer $PESAGUARD_API_KEY" />
+    <DocsLayout slug={slug} title={title} intro={intro} meta={meta} sections={sections}>
+      {children}
     </DocsLayout>
   );
 }

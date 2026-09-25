@@ -199,17 +199,17 @@
   padding-block: 18px;
 }
 
-.api-strip-inner span:first-child {
+.api-strip-inner > div {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.api-strip-label {
   font: 500 var(--step--1) / 1.5 var(--font-mono);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   color: var(--text-faint);
-}
-
-.api-strip-inner span:not(:first-child) {
-  font-size: var(--step-0);
-  font-weight: 600;
-  color: var(--text-muted);
 }
 /* --- Endpoint catalogue ------------------------------------------------- */
 
@@ -240,7 +240,7 @@
 
 .endpoint-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
   gap: 16px;
 }
 
@@ -501,4 +501,101 @@
 
 .api-text-link {
   margin-top: 8px;
+}
+
+/* API overview, second pass ------------------------------------------------ */
+
+.api-code-card .code-token-key { color: var(--lime); }
+.api-code-card .code-token-string { color: #b9e6c9; }
+.api-code-card .code-token-var { color: #e6cf8f; }
+.api-code-card .code-token-flag { color: #9cc7de; }
+.api-code-card .code-token-number { color: var(--signal-amber); }
+
+.api-strip-inner .mono {
+  font: 500 var(--step-0) / 1.5 var(--font-mono);
+  color: var(--ink);
+}
+
+.api-strip-inner {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.endpoint-top {
+  gap: 10px;
+}
+
+.endpoint-state {
+  margin-left: auto;
+  font: 500 var(--step--1) / 1.4 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-faint);
+}
+
+.endpoint-state-documented { color: var(--lime-ink); }
+.endpoint-state-unwired { color: #855a0c; }
+.endpoint-state-internal { color: var(--text-faint); }
+
+.endpoint-card code {
+  overflow-wrap: anywhere;
+}
+
+.api-conventions {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+.api-conventions h2 {
+  margin: 10px 0 16px;
+}
+
+.api-conventions > div > p:last-child {
+  color: var(--text-on-dark-muted);
+  line-height: 1.7;
+}
+
+.api-spec {
+  margin: 0;
+  border-top: 1px solid var(--ink-line);
+}
+
+.api-spec > div {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.api-spec dt {
+  font: 500 var(--step--1) / 1.6 var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--lime);
+}
+
+.api-spec dd {
+  margin: 0;
+  color: var(--text-on-dark-muted);
+  line-height: 1.7;
+}
+
+.api-spec dd a {
+  display: inline-flex;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .api-conventions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .api-spec > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
 }
