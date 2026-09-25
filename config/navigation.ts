@@ -35,10 +35,10 @@ const primary: NavItem[] = [
       {
         title: "Developers",
         links: [
-          { label: "API reference", href: "/api", description: "Endpoints, payloads and error shapes" },
+          { label: "API reference", href: "/api", description: "What exists, and what state it is in" },
           { label: "Documentation", href: "/documentation", description: "Guides for building against PesaGuard" },
           { label: "Webhook ingestion", href: "/integrations/webhooks", description: "Idempotent, signature-checked callbacks" },
-          { label: "Changelog", href: "/documentation/changelog", description: "What changed and when" },
+          { label: "Changelog", href: "/documentation/changelog", description: "Versioning and where changes are recorded" },
         ],
       },
     ],
@@ -136,24 +136,26 @@ const primary: NavItem[] = [
       {
         title: "Start here",
         links: [
-          { label: "Getting started", href: "/documentation/getting-started", description: "Credentials, environments, first request" },
-          { label: "Authentication", href: "/documentation/authentication", description: "Bearer tokens, scopes and rotation" },
-          { label: "Transactions", href: "/documentation/transactions", description: "Canonical transaction shape" },
+          { label: "Getting started", href: "/documentation/getting-started", description: "Create a key and send a first transaction" },
+          { label: "Authentication", href: "/documentation/authentication", description: "API keys, bearer tokens and roles" },
+          { label: "Transactions", href: "/documentation/transactions", description: "POST /api/v1/transactions, field by field" },
           { label: "Reconciliation", href: "/documentation/reconciliation", description: "Matching rules and exceptions" },
+          { label: "Discrepancies", href: "/documentation/discrepancies", description: "List, assign and resolve exceptions" },
         ],
       },
       {
         title: "Operating PesaGuard",
         links: [
-          { label: "Webhooks", href: "/documentation/webhooks", description: "Signature checks, retries and replay" },
-          { label: "Fraud", href: "/documentation/fraud", description: "Signals, scoring and review" },
-          { label: "Errors", href: "/documentation/errors", description: "Stable error codes and retry guidance" },
+          { label: "Idempotency", href: "/documentation/idempotency", description: "Duplicate detection and safe retries" },
+          { label: "Webhooks", href: "/documentation/webhooks", description: "Inbound callbacks and signed outbound delivery" },
+          { label: "Fraud", href: "/documentation/fraud", description: "Risk levels and the signals behind them" },
+          { label: "Errors", href: "/documentation/errors", description: "Error shapes and retry guidance" },
           { label: "Rate limits", href: "/documentation/rate-limits", description: "Limits, backoff and 429 handling" },
-          { label: "Changelog", href: "/documentation/changelog", description: "Dated record of shipped changes" },
+          { label: "Changelog", href: "/documentation/changelog", description: "Versioning and where changes are recorded" },
         ],
       },
     ],
-    foot: { label: "Browse the API reference", href: "/api", description: "Request and response shapes for every endpoint." },
+    foot: { label: "Browse the API reference", href: "/api", description: "What exists, and what state it is in." },
   },
   { label: "Pricing", href: "/pricing" },
 ];

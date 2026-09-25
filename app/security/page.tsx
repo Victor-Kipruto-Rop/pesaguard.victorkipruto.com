@@ -33,7 +33,7 @@ export default function Security() {
             <SectionHeading
               eyebrow="Controls"
               title="Four layers, reviewed together."
-              body="Encryption, explicit identity, tenant boundaries and retained evidence — each one auditable."
+              body="Encryption, explicit identity, tenant boundaries and retained evidence, each one auditable."
             />
             <PillarGrid pillars={data.pillars} />
           </Reveal>

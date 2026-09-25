@@ -13,14 +13,14 @@ const STAGES = [
   {
     id: "ingest",
     name: "Ingest",
-    title: "Every event lands once — and only once.",
+    title: "Every event lands once, and only once.",
     body: "Events are persisted before processing, de-duplicated on write and queued durably. A replay or a provider retry never creates a second financial record.",
   },
   {
     id: "validate",
     name: "Validate",
     title: "Bad data is caught, not absorbed.",
-    body: "Schema, currency, amount and reference rules run before anything is trusted. Invalid records are quarantined with the reason attached — never silently dropped.",
+    body: "Schema, currency, amount and reference rules run before anything is trusted. Invalid records are quarantined with the reason attached, never silently dropped.",
   },
   {
     id: "reconcile",
@@ -32,13 +32,13 @@ const STAGES = [
     id: "analyze",
     name: "Analyze",
     title: "Signals are scored in context.",
-    body: "Velocity, amount deviation, duplicate references and timing patterns are checked against explicit rules. An anomaly is a signal to review — never an automatic verdict.",
+    body: "Velocity, amount deviation, duplicate references and timing patterns are checked against explicit rules. An anomaly is a signal to review, never an automatic verdict.",
   },
   {
     id: "alert",
     name: "Alert",
     title: "The right owner is told, quickly.",
-    body: "Exceptions and review signals route to SMS, email, Slack and webhooks — with severity, reason and the transaction context attached.",
+    body: "Exceptions and review signals route to SMS, email, Slack and webhooks, with severity, reason and the transaction context attached.",
   },
   {
     id: "resolve",
@@ -50,7 +50,7 @@ const STAGES = [
     id: "report",
     name: "Report",
     title: "Operations get a dependable picture.",
-    body: "Reconciliation summaries, exception queues and trend reports close the loop — from raw event to a record finance can trust.",
+    body: "Reconciliation summaries, exception queues and trend reports close the loop: from raw event to a record finance can trust.",
   },
 ];
 

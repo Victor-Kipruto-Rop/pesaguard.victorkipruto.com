@@ -24,19 +24,19 @@ export const serviceCatalogue = [
     name: "Airtel Money",
     detail: "Airtel Money rail support is not started yet.",
     observedByProbe: false,
-    unobservedReason: "Not started — not monitored by any probe.",
+    unobservedReason: "Not started, so no probe monitors it.",
   },
   {
     name: "Bank rails",
     detail: "Bank-based payout rails are not started yet.",
     observedByProbe: false,
-    unobservedReason: "Not started — not monitored by any probe.",
+    unobservedReason: "Not started, so no probe monitors it.",
   },
   {
     name: "POS integrations",
     detail: "Point-of-sale channels are not started yet.",
     observedByProbe: false,
-    unobservedReason: "Not started — not monitored by any probe.",
+    unobservedReason: "Not started, so no probe monitors it.",
   },
 ];
 

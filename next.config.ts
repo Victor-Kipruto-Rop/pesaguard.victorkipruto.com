@@ -45,6 +45,17 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   images: { unoptimized: true },
+  async redirects() {
+    // The per-topic API pages duplicated the docs. Keep their URLs alive.
+    return [
+      { source: "/api/authentication", destination: "/documentation/authentication", permanent: true },
+      { source: "/api/transactions", destination: "/documentation/transactions", permanent: true },
+      { source: "/api/reconciliation", destination: "/documentation/reconciliation", permanent: true },
+      { source: "/api/fraud", destination: "/documentation/fraud", permanent: true },
+      { source: "/api/webhooks", destination: "/documentation/webhooks", permanent: true },
+      { source: "/api/reference", destination: "/api", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders(process.env.NODE_ENV === "production") }];
   },

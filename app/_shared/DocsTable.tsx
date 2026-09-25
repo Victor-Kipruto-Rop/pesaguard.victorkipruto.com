@@ -5,14 +5,17 @@ export function DocsTable({
   caption,
   head,
   rows,
+  compact = false,
 }: {
   caption: string;
   head: string[];
   rows: ReactNode[][];
+  /** Tighter cells that never wrap, for wide comparison tables. */
+  compact?: boolean;
 }) {
   return (
     <div className="table-wrap">
-      <table className="data-table">
+      <table className={compact ? "data-table data-table-compact" : "data-table"}>
         <caption>{caption}</caption>
         <thead>
           <tr>

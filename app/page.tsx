@@ -26,12 +26,12 @@ const FAQ_ITEMS = [
   {
     question: "How does PesaGuard reconcile transactions?",
     answer:
-      "Provider callbacks are validated, de-duplicated and matched against internal records using deterministic rules — amount, reference and timestamp tolerance. Every outcome keeps its evidence, and mismatches queue as exceptions with the reason attached.",
+      "Provider callbacks are validated, de-duplicated and matched against internal records using deterministic rules: amount, reference and timestamp tolerance. Every outcome keeps its evidence, and mismatches queue as exceptions with the reason attached.",
   },
   {
     question: "Which payment channels are supported?",
     answer:
-      "M-Pesa (Safaricom Daraja) and outbound webhooks are live today. Airtel Money, bank rails and point-of-sale integrations are named on the roadmap but have no adapter yet — the integrations page keeps that boundary explicit.",
+      "M-Pesa (Safaricom Daraja) and outbound webhooks are live today. Airtel Money, bank rails and point-of-sale integrations are named on the roadmap but have no adapter yet. The integrations page keeps that boundary explicit.",
   },
   {
     question: "Does PesaGuard support M-Pesa?",
@@ -51,7 +51,7 @@ const FAQ_ITEMS = [
   {
     question: "How does anomaly detection work?",
     answer:
-      "Explicit rules and statistical checks score signals in context — amount deviation, velocity, duplicate references, timing and channel patterns. A score is a signal for review, never an automatic fraud verdict, and every decision stays traceable.",
+      "Explicit rules and statistical checks score signals in context: amount deviation, velocity, duplicate references, timing and channel patterns. A score is a signal for review, never an automatic fraud verdict, and every decision stays traceable.",
   },
   {
     question: "How is transaction data protected?",
@@ -85,7 +85,7 @@ const OBSERVABILITY = [
 const SECURITY_LAYERS = [
   { name: "Authentication", note: "Bearer tokens with scopes and rotation for server-to-server access." },
   { name: "Authorization", note: "Role-based access control; permissions evaluated server-side." },
-  { name: "Tenant isolation", note: "Isolation enforced at the database layer — 0 cross-tenant rows in the committed load test." },
+  { name: "Tenant isolation", note: "Isolation enforced at the database layer, with 0 cross-tenant rows in the committed load test." },
   { name: "Rate limiting", note: "Bounded, per-endpoint limits with backoff guidance for clients." },
   { name: "Encryption", note: "In transit and at rest, using established managed cryptography." },
   { name: "Audit logging", note: "Every consequential action recorded; nothing silently overridden." },
@@ -125,7 +125,7 @@ export default function Home() {
                 target="_blank"
               >
                 <Terminal aria-hidden="true" size={13} />
-                Built for modern payment infrastructure — view API documentation
+                Built for modern payment infrastructure. View API documentation
                 <ArrowUpRight aria-hidden="true" size={12} />
               </Link>
             </div>
@@ -201,8 +201,8 @@ export default function Home() {
                     Payment data moves fast. Reconciliation shouldn&apos;t move slowly.
                   </h2>
                   <p className="pg-lede">
-                    Most teams still assemble the truth from exports, spreadsheets and chat threads
-                    — long after the money moved.
+                    Most teams still assemble the truth from exports, spreadsheets and chat threads,
+                    long after the money moved.
                   </p>
                 </div>
                 <div className="pg-frag">
@@ -334,7 +334,7 @@ export default function Home() {
                 <h2 className="pg-h2">Find transactions that don&apos;t behave normally.</h2>
                 <p className="pg-lede">
                   No black boxes. Explicit rules and statistical checks score signals in context.
-                  A high score means a human should look — never an automatic verdict of fraud.
+                  A high score means a human should look. It is never an automatic verdict of fraud.
                 </p>
                 <Link className="pg-devlink" href="/features/fraud-detection" style={{ marginTop: 22 }}>
                   Explore fraud signals
@@ -389,7 +389,7 @@ export default function Home() {
                 <p className="pg-eyebrow">Alerting</p>
                 <h2 className="pg-h2">When something needs attention, PesaGuard tells you.</h2>
                 <p className="pg-lede">
-                  Alerts carry the reason, the severity and the transaction context — and route to
+                  Alerts carry the reason, the severity and the transaction context, and route to
                   the channel your team actually watches. Delivery attempts, retries and
                   dead-letters are all observable.
                 </p>
@@ -442,7 +442,7 @@ export default function Home() {
               <p className="pg-eyebrow">Integrations</p>
               <h2 className="pg-h2">Meet your payment stack where it is.</h2>
               <p className="pg-lede" style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}>
-                Live rails are labelled live. Everything else is labelled planned — never implied.
+                Live rails are labelled live. Everything else is labelled planned, never implied.
               </p>
               <div className="pg-integrations">
                 {[
@@ -639,7 +639,7 @@ export default function Home() {
               <p className="pg-eyebrow">Load test results</p>
               <h2 className="pg-h2">Measured, then documented.</h2>
               <p className="pg-lede" style={{ marginBottom: "clamp(28px, 4vw, 44px)" }}>
-                These are benchmark results from a committed load-test run — not customer
+                These are benchmark results from a committed load-test run, not customer
                 adoption or production traffic.
               </p>
               <div className="pg-proof">

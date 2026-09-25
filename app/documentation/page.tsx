@@ -1,36 +1,58 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { DocsPage } from "@/app/_shared/DocsPage";
+import { apiBaseUrl } from "@/content/api-samples";
+import { docsHref, docsNav } from "@/lib/docs/nav";
 import { pageMetadata } from "@/lib/seo/metadata";
 
 export const metadata = pageMetadata(
   "Documentation | PesaGuard",
-  "Practical guidance for integrating, monitoring, and operating PesaGuard on your M-Pesa flow.",
+  "Guides and reference for integrating with PesaGuard: authentication, transactions, discrepancies, webhooks and reconciliation.",
   "/documentation",
 );
 
 export default function Documentation() {
   return (
     <DocsPage
-      title="Documentation for payment operators."
-      intro="Practical guidance for integrating, monitoring, and operating PesaGuard. Pages marked as not published yet say so plainly."
+      slug=""
+      title="Documentation"
+      intro="How to send transactions to PesaGuard, work the exceptions it raises, and understand how it decides. Written from the source of the platform, so where something is not built yet the page says so."
+      meta={[
+        ["Base URL", apiBaseUrl],
+        ["Version", "v1"],
+        ["Stage", "Pilot"],
+      ]}
     >
+      {docsNav.map((group) => (
+        <section key={group.title}>
+          <h2>{group.title}</h2>
+          <div className="docs-cards">
+            {group.items.map((item) => (
+              <Link className="docs-card" href={docsHref(item.slug)} key={item.slug}>
+                <h3>{item.title}</h3>
+                <p>{item.summary}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
       <section>
-        <h2>Published</h2>
+        <h2>Also useful</h2>
         <ul>
-          <li><Link href="/documentation/getting-started">Getting started</Link>: send your first transaction.</li>
-          <li><Link href="/documentation/authentication">Authentication</Link>: API keys and bearer tokens.</li>
-          <li><Link href="/documentation/transactions">Transactions</Link>: the create-transaction endpoint.</li>
-          <li><Link href="/documentation/errors">Errors</Link>: status codes and error bodies.</li>
-        </ul>
-      </section>
-      <section>
-        <h2>Not published yet</h2>
-        <ul>
-          <li><Link href="/documentation/reconciliation">Reconciliation</Link></li>
-          <li><Link href="/documentation/fraud">Fraud signals</Link></li>
-          <li><Link href="/documentation/webhooks">Webhooks</Link></li>
-          <li><Link href="/documentation/rate-limits">Rate limits</Link></li>
-          <li><Link href="/documentation/changelog">Changelog</Link></li>
+          <li>
+            <Link href="/api">API overview</Link>, a one-page summary of what is available.
+          </li>
+          <li>
+            <Link href="/status">Service status</Link>, the live health signal for this deployment.
+          </li>
+          <li>
+            <Link href="/integrations">Integrations</Link>, what is live and what is only planned.
+          </li>
+          <li>
+            <a href="https://github.com/Victor-Kipruto-Rop/pesaguard" rel="noreferrer" target="_blank">
+              Source repository <ArrowUpRight size={13} aria-hidden="true" />
+            </a>
+          </li>
         </ul>
       </section>
     </DocsPage>

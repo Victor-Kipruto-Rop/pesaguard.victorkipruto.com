@@ -6,7 +6,7 @@
  * Detail routes are thin: each one names a title and lets `RoutePage` resolve
  * the body. Before this module existed every detail page inherited a *parent*
  * body, so seven feature pages rendered identical copy with only the heading
- * changed. Entries here are keyed by the exact title the route passes â€” the
+ * changed. Entries here are keyed by the exact title the route passes - the
  * titles are unique, which is what makes the lookup unambiguous.
  *
  * Wording rules for this file:
@@ -22,7 +22,7 @@ export const detailPages: Record<string, PageData> = {
     lede: "Reconciliation is only as useful as the reasoning behind it. Every match, exception, review and configuration change is written to a record that is appended to, never rewritten.",
     spec: [
       { label: "Write model", value: "Append-only" },
-      { label: "Attached to", value: "Tenant Â· transaction Â· operator" },
+      { label: "Attached to", value: "Tenant · transaction · operator" },
       { label: "Secret material", value: "Excluded by design" },
       { label: "Use", value: "Review, dispute response, audit" },
     ],
@@ -85,7 +85,7 @@ export const detailPages: Record<string, PageData> = {
     label: "Data quality",
     lede: "Bad payment data is worse than missing payment data, because it looks authoritative. Records are validated and normalized before anything downstream trusts them.",
     spec: [
-      { label: "Checked on arrival", value: "Schema Â· currency Â· amount Â· reference" },
+      { label: "Checked on arrival", value: "Schema · currency · amount · reference" },
       { label: "On failure", value: "Quarantined with the reason" },
       { label: "On success", value: "Normalized to one canonical shape" },
       { label: "Silent drops", value: "Never" },
@@ -149,7 +149,7 @@ export const detailPages: Record<string, PageData> = {
     lede: "A score on its own changes nothing. Every signal names the pattern it saw, so a reviewer can decide quickly instead of forming a theory.",
     spec: [
       { label: "Method", value: "Explicit rules plus statistical checks" },
-      { label: "Signals", value: "Amount Â· velocity Â· duplicates Â· timing Â· channel" },
+      { label: "Signals", value: "Amount · velocity · duplicates · timing · channel" },
       { label: "Output", value: "Score with the reasons listed" },
       { label: "Authority", value: "Signals review, never declares fraud" },
     ],
@@ -211,7 +211,7 @@ export const detailPages: Record<string, PageData> = {
     label: "Real-time alerts",
     lede: "An alert that arrives without context creates work instead of removing it. Notifications carry the amount, the reason, the severity and the transaction reference.",
     spec: [
-      { label: "Channels", value: "SMS Â· email Â· Slack Â· webhooks" },
+      { label: "Channels", value: "SMS · email · Slack · webhooks" },
       { label: "Payload", value: "Severity, reason, transaction context" },
       { label: "Delivery", value: "Attempts, retries, dead letters" },
       { label: "Routing", value: "By severity and owner" },
@@ -279,7 +279,7 @@ export const detailPages: Record<string, PageData> = {
       note: "Matching runs on Daraja callbacks in the pilot deployment.",
     },
     spec: [
-      { label: "Match keys", value: "Amount Â· reference Â· timestamp tolerance" },
+      { label: "Match keys", value: "Amount · reference · timestamp tolerance" },
       { label: "When", value: "As callbacks arrive" },
       { label: "On difference", value: "Exception with reason attached" },
       { label: "Replay safety", value: "Idempotent by write" },
@@ -349,7 +349,7 @@ export const detailPages: Record<string, PageData> = {
     lede: "A report is only useful if it closes the loop. Summaries are built from the same reconciled records the operations team already reviewed, so the numbers and the queue agree.",
     spec: [
       { label: "Built from", value: "Reconciled records, not raw exports" },
-      { label: "Covers", value: "Match rate Â· unmatched Â· exceptions Â· trends" },
+      { label: "Covers", value: "Match rate · unmatched · exceptions · trends" },
       { label: "Periods", value: "Daily, weekly, period close" },
       { label: "Traceable", value: "Every figure resolves to its events" },
     ],
@@ -485,8 +485,8 @@ export const detailPages: Record<string, PageData> = {
     },
     spec: [
       { label: "Provider", value: "Safaricom Daraja" },
-      { label: "Flows", value: "STK Push Â· PayBill" },
-      { label: "On callback", value: "Validate Â· de-duplicate Â· match" },
+      { label: "Flows", value: "STK Push · PayBill" },
+      { label: "On callback", value: "Validate · de-duplicate · match" },
       { label: "Retry safety", value: "Idempotent by write" },
     ],
     capabilities: [
